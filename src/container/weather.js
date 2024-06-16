@@ -65,13 +65,30 @@ function Weather() {
   const searchCity = () => {
     setSearchIcon(cityName);
   };
-
-  // let timestamp = 1718571600;
-  // let date = new Date(timestamp * 1000);
-  // let formattedDate = date.toISOString().split("T")[0];
-  // console.log(formattedDate);
+  const WeatherImg = (mainWeather) => {
+    switch (mainWeather) {
+      case "Rain":
+        return rain;
+      case "Clouds":
+        return cloud;
+      case "Clear":
+        return clear;
+      case "Snow":
+        return snow;
+      default:
+        return "";
+    }
+  };
+  const Timestamp = (ts) => {
+    const date = new Date(ts * 1000);
+    const formattedDate = date.toISOString().split("T")[0];
+    const formattedTime = date.toTimeString().split(" ")[0];
+    return { formattedDate, formattedTime };
+  };
+  
 
   console.log(weatherData);
+
   return (
     <div className="container">
       <div className="content">
@@ -116,7 +133,32 @@ function Weather() {
                 </div>
               </section>
             </div>
-            <div className="next-weather"></div>
+            <div className="hour-forecast">
+              {weatherData.list.slice(1, 20).map((data, index) => {
+                const { formattedDate, formattedTime } = Timestamp(
+                  data.dt
+                );
+
+                // console.log(weatherData.list[index].dt);
+                // sw = weatherData.list[index].dt;
+                return (
+                  <div className="hour-forecast-content">
+                    <p className="temperature">
+                      {(weatherData.list[index].main.temp - 273.15).toFixed(2)}
+                      °C
+                    </p>
+
+                    <img
+                      src={WeatherImg(data.weather[0].main)}
+                      className="weather-img"
+                      alt="weather icon"
+                    />
+                    <p className="hour-forecast-date">{formattedDate}</p>
+                    <p className="hour-forecast-time">{formattedTime}</p>
+                  </div>
+                );
+              })}
+            </div>
           </>
         )}
       </div>
