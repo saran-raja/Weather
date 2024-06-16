@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./weather.css";
 import axios from "axios";
 import humidity from "./humidity.png";
-import temperature from "./temperature.png";
 import wind from "./wind.png";
 import rain from "./images/rain.png";
 import clear from "./images/clear.png";
