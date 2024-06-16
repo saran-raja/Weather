@@ -57,11 +57,21 @@ function Weather() {
   const handleCity = (event) => {
     setCity(event.target.value);
   };
-
+  const handleEnter = (event) => {
+    if (event.key === "Enter") {
+      searchCity();
+    }
+  };
   const searchCity = () => {
     setSearchIcon(cityName);
   };
 
+  // let timestamp = 1718571600;
+  // let date = new Date(timestamp * 1000);
+  // let formattedDate = date.toISOString().split("T")[0];
+  // console.log(formattedDate);
+
+  console.log(weatherData);
   return (
     <div className="container">
       <div className="content">
@@ -69,6 +79,7 @@ function Weather() {
           type="text"
           className="city"
           onChange={handleCity}
+          onKeyDown={handleEnter}
           value={cityName}
           placeholder="Enter city name"
         />
@@ -105,6 +116,7 @@ function Weather() {
                 </div>
               </section>
             </div>
+            <div className="next-weather"></div>
           </>
         )}
       </div>
