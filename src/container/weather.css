@@ -115,7 +115,7 @@ p {
  padding-top: 20px;
 }
 .hour-forecast::-webkit-scrollbar {
-  display: none; /* WebKit */
+  display: none;
 }
 .hour-forecast .temperature{
 

@@ -80,12 +80,36 @@ function Weather() {
     }
   };
   const Timestamp = (ts) => {
-    const date = new Date(ts * 1000);
-    const formattedDate = date.toISOString().split("T")[0];
-    const formattedTime = date.toTimeString().split(" ")[0];
+    const weatherDate = new Date(ts * 1000);
+    const currentDate = new Date();
+    let date = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const tomorrowDate = new Date();
+    tomorrowDate.setDate(currentDate.getDate() + 1);
+    const year = currentDate.getFullYear();
+    let tomorrowdate = tomorrowDate.getDate();
+
+    const addZero = (num) => {
+      return month <= 9 ? "0" + month : month;
+    };
+    const tddate = year + "-" + addZero() + "-" + date;
+
+    // console.log("=>" + addZero());
+    let formattedDate = weatherDate.toISOString().split("T")[0];
+    let formattedTime = weatherDate.toTimeString().split(" ")[0];
+    if (formattedDate == tddate) {
+      formattedDate = "Today";
+    }
+    else
+    if (formattedDate == year + "-" + addZero() + "-" + tomorrowdate) {
+      formattedDate = "Tomorrow";
+    }
+
+    console.log("tomorrow=>" + tomorrowdate);
+    console.log(formattedDate);
+
     return { formattedDate, formattedTime };
   };
-  
 
   console.log(weatherData);
 
@@ -134,10 +158,8 @@ function Weather() {
               </section>
             </div>
             <div className="hour-forecast">
-              {weatherData.list.slice(1, 20).map((data, index) => {
-                const { formattedDate, formattedTime } = Timestamp(
-                  data.dt
-                );
+              {weatherData.list.slice(1, 25).map((data, index) => {
+                const { formattedDate, formattedTime } = Timestamp(data.dt);
 
                 // console.log(weatherData.list[index].dt);
                 // sw = weatherData.list[index].dt;
