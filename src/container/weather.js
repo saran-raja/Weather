@@ -97,19 +97,19 @@ function Weather() {
     // console.log("=>" + addZero());
     let formattedDate = weatherDate.toISOString().split("T")[0];
     let formattedTime = weatherDate.toTimeString().split(" ")[0];
-    if (formattedDate == tddate) {
+    if (formattedDate === tddate) {
       formattedDate = "Today";
-    } else if (formattedDate == year + "-" + addZero() + "-" + tomorrowdate) {
+    } else if (formattedDate === year + "-" + addZero() + "-" + tomorrowdate) {
       formattedDate = "Tomorrow";
     }
 
-    console.log("tomorrow=>" + tomorrowdate);
-    console.log(formattedDate);
+    // console.log("tomorrow=>" + tomorrowdate);
+    // console.log(formattedDate);
 
     return { formattedDate, formattedTime };
   };
 
-  console.log(weatherData);
+  // console.log(weatherData);
 
   return (
     <div className="container">
@@ -156,7 +156,7 @@ function Weather() {
               </section>
             </div>
             <div className="hour-forecast">
-              {weatherData.list.slice(1, 25).map((data, index) => {
+              {weatherData.list.slice(1, 30).map((data, index) => {
                 const { formattedDate, formattedTime } = Timestamp(data.dt);
                 return (
                   <div className="hour-forecast-content">
